@@ -5,8 +5,6 @@ Requires at least: WordPress 2.9.1 / BuddyPress 1.5
 Tested up to: WordPress 3.3 / BuddyPress 1.5
 Stable Tag: 1.5
 
-Code updated by: Patriek Jeuriens to work with latest versions of Wordpress.
-
 == Description ==
 
 Give group creators and administrators on your BuddyPress install the ability to attach
