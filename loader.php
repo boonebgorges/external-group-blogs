@@ -3,11 +3,11 @@
 Plugin Name: External Group Blogs
 Plugin URI: http://wordpress.org/extend/plugins/external-group-blogs/
 Description: Allow group creators to supply external blog RSS feeds that will attach future posts on blogs to a group.
-Version: 1.2.1
-Requires at least: WordPress 2.9.1 / BuddyPress 1.2
-Tested up to: WordPress 2.9.1 / BuddyPress 1.2
+Version: 1.5
+Requires at least: WordPress 2.9.1 / BuddyPress 1.5
+Tested up to: WordPress 3.3 / BuddyPress 1.5
 License: GNU/GPL 2
-Author: Andy Peatling
+Author: Andy Peatling, modemlooper
 Author URI: http://buddypress.org/developers/apeatling/
 */
 /* Only load the plugin functions if BuddyPress is loaded and initialized. */

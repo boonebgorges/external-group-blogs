@@ -1,9 +1,9 @@
 === BuddyPress External Group Blogs ===
 Contributors: apeatling
 Tags: buddypress, groups, blogs, external-blogs, feeds, aggregation
-Requires at least: WordPress 2.9.1 / BuddyPress 1.2
+Requires at least: WordPress 2.9.1 / BuddyPress 1.5
 Tested up to: WordPress 3.3 / BuddyPress 1.5
-Stable Tag: 1.3
+Stable Tag: 1.5
 
 Code updated by: Patriek Jeuriens to work with latest versions of Wordpress.
 
@@ -24,6 +24,9 @@ New posts will automatically be pulled every hour, or every 30 minutes if someon
  4. Blogs can be added to an existing group by visiting that group's admin menu.
 
 == Changelog ==
+
+= 1.5 =
+* fixes for latest version BuddyPress.
 
 = 1.2.1 =
 
