@@ -1,5 +1,5 @@
 === BuddyPress External Group Blogs ===
-Contributors: apeatling
+Contributors: apeatling, modemlooper
 Tags: buddypress, groups, blogs, external-blogs, feeds, aggregation
 Requires at least: WordPress 2.9.1 / BuddyPress 1.5
 Tested up to: WordPress 3.3 / BuddyPress 1.5
