@@ -1,8 +1,9 @@
 <?php
 /* Group blog extension using the BuddyPress group extension API */
-if (class_exists('BP_Group_Extension')) {
+if ( class_exists('BP_Group_Extension' ) ) {
+
 	class Group_External_Blogs extends BP_Group_Extension {
-		function group_external_blogs() {
+		function __construct() {
 			global $bp;
 			$this->name = __( 'External Blogs', 'bp-groups-externalblogs' );
 			$this->slug = 'external-blog-feeds';
@@ -97,7 +98,9 @@ if (class_exists('BP_Group_Extension')) {
 		function display() {}
 		function widget_display() {}
 	}
+
 	bp_register_group_extension( 'Group_External_Blogs' );
+
 	function bp_groupblogs_fetch_group_feeds( $group_id = false ) {
 		global $bp;
 		include_once( ABSPATH . 'wp-includes/rss.php' );
@@ -111,7 +114,7 @@ if (class_exists('BP_Group_Extension')) {
 			return false;
 		$group_blogs = groups_get_groupmeta( $group_id, 'blogfeeds' );
 		$group_blogs = explode(";",$group_blogs[0]);
-		
+
 		/* Set the visibility */
 		$hide_sitewide = ( 'public' != $group->status ) ? true : false;
 		foreach ( (array) $group_blogs as $feed_url ) {
@@ -145,7 +148,7 @@ if (class_exists('BP_Group_Extension')) {
 			} else {
 				$activity_action = sprintf( __( 'Blog: %s from %s in the group %s', 'bp-groups-externalblogs' ), '<a class="feed-link" href="' . esc_attr( $post['link'] ) . '">' . esc_attr( $post['title'] ) . '</a>', '<a class="feed-author" href="' . esc_attr( $post['blogurl'] ) . '">' . attribute_escape( $post['blogname'] ) . '</a>', '<a href="' . bp_get_group_permalink( $group ) . '">' . attribute_escape( $group->name ) . '</a>' );
 			}
-			
+
 			$activity_content = '<div>' . strip_tags( bp_create_excerpt( $post['description'], 175 ) ) . '</div>';
 			$activity_content = apply_filters( 'bp_groupblogs_activity_content', $activity_content, $post, $group );
 			/* Fetch an existing activity_id if one exists. */
@@ -167,12 +170,14 @@ if (class_exists('BP_Group_Extension')) {
 		}
 		return $items;
 	}
+
 	/* Add a filter option to the filter select box on group activity pages */
 	function bp_groupblogs_add_filter() { ?>
 		<option value="exb"><?php _e( 'External Blogs', 'bp-groups-externalblogs' ) ?></option><?php
 	}
 	add_action( 'bp_group_activity_filter_options', 'bp_groupblogs_add_filter' );
 	add_action( 'bp_activity_filter_options', 'bp_groupblogs_add_filter' );
+
 	/* Add a filter option groups avatar */
 	/* Fetch group twitter posts after 30 mins expires and someone hits the group page */
 	function bp_groupblogs_refetch() {
@@ -196,11 +201,13 @@ if (class_exists('BP_Group_Extension')) {
 		}
 	}
 	add_action( 'groups_screen_group_home', 'bp_groupblogs_refetch' );
+
 	/* Refresh via an AJAX post for the group */
 	function bp_groupblogs_ajax_refresh() {
 		bp_groupblogs_fetch_group_feeds( $_POST['group_id'] );
 	}
 	add_action( 'wp_ajax_refetch_groupblogs', 'bp_groupblogs_ajax_refresh' );
+
 	function bp_groupblogs_cron_refresh() {
 		global $bp, $wpdb;
 		$group_ids = $wpdb->get_col( $wpdb->prepare( "SELECT group_id FROM " . $bp->groups->table_name_groupmeta . " WHERE meta_key = 'blogfeeds'" ) );
@@ -209,12 +216,13 @@ if (class_exists('BP_Group_Extension')) {
 	}
 	add_action( 'bp_groupblogs_cron', 'bp_groupblogs_cron_refresh' );
 }
-// Add a filter option groups avatar 
+
+// Add a filter option groups avatar
 function bp_groupblogs_avatar_type($var) {
-    global $activities_template, $bp; 
-	
-	If ($activities_template->activity->type == "exb") {
-		return 'group';	
+	global $activities_template, $bp;
+
+	if ( $activities_template->activity->type == "exb" ) {
+		return 'group';
 	} else {
 		return $var;
 	}
@@ -223,14 +231,15 @@ add_action( 'bp_get_activity_avatar_object_groups', 'bp_groupblogs_avatar_type')
 add_action( 'bp_get_activity_avatar_object_activity', 'bp_groupblogs_avatar_type');
 
 function bp_groupblogs_avatar_id($var) {
-    global $activities_template, $bp; 
+	global $activities_template, $bp;
 
-		If ($activities_template->activity->type == "exb") {
-			return $activities_template->activity->item_id;	
-		} 
-			return $var;
-		
+	if ( $activities_template->activity->type == "exb" ) {
+		return $activities_template->activity->item_id;
+	}
+
+	return $var;
+
 }
 add_action( 'bp_get_activity_avatar_item_id', 'bp_groupblogs_avatar_id');
- 
+
 ?>
