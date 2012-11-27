@@ -147,7 +147,7 @@ if (class_exists('BP_Group_Extension')) {
 			}
 			
 			$activity_content = '<div>' . strip_tags( bp_create_excerpt( $post['description'], 175 ) ) . '</div>';
-			$activity_content = apply_filters( 'bp_groupblogs_activity_content', $activity_content, &$post, &$group );
+			$activity_content = apply_filters( 'bp_groupblogs_activity_content', $activity_content, $post, $group );
 			/* Fetch an existing activity_id if one exists. */
 			if ( function_exists( 'bp_activity_get_activity_id' ) )
 				$id = bp_activity_get_activity_id( array( 'user_id' => false, 'action' => $activity_action, 'component' => $bp->groups->id, 'type' => 'exb', 'item_id' => $group_id, 'secondary_item_id' => wp_hash( $post['blogurl'] ) ) );
